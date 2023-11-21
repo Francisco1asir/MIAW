@@ -10,21 +10,33 @@ export class AutoresService {
   constructor(
     @InjectRepository(Autore)
     private readonly autorRepository: Repository<Autore>
-  ){}
+  ) { }
 
-async create(createAutoreDto: CreateAutoreDto) {
-  try {
-    const autor = this.autorRepository.create(createAutoreDto);
-    await this.autorRepository.save(autor)
-    return {
-      msg: 'Registro insertado',
-      data: autor,
-      status: 200 
-      
+  async create(createAutoreDto: CreateAutoreDto) {
+    try {
+      const autor = this.autorRepository.create(createAutoreDto);
+      await this.autorRepository.save(autor);
+      return {
+        msg: 'Registro insertado',
+        data: autor,
+        status: 200,
+      };
+    } catch (error) {
+      throw new InternalServerErrorException('Ponte en contacto con el admin');
     }
-  }catch(error){
-    throw new InternalServerErrorException('Ponte en contacto con el admin')
-  }}
+  }
+// Borrado de autores
+  async deleteAllAutores() {
+    const query = this.autorRepository.createQueryBuilder('autor');
+    try {
+      return await query
+        .delete()
+        .where({})
+        .execute()
+    } catch (error) {
+      throw new InternalServerErrorException('Ponte en contacto con el administrador ...')
+    }
+  }
 
   findAll() {
     return `This action returns all autores`;
@@ -42,4 +54,5 @@ async create(createAutoreDto: CreateAutoreDto) {
   remove(id: number) {
     return `This action removes a #${id} autore`;
   }
+
 }
