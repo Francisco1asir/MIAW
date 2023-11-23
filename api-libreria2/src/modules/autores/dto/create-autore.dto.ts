@@ -6,7 +6,7 @@ export class CreateAutoreDto{
 
     @IsString()
     @MinLength(1)
-    id: string;
+    nif: string;
 
     @IsString()
     @MinLength(5)
