@@ -1,32 +1,42 @@
 import { Autore } from "src/modules/autores/entities/autore.entity";
-import { BeforeInsert, BeforeUpdate, Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn, ManyToOne } from "typeorm";
 
 @Entity()
-export class Libro{
-
+export class Libro {
     @PrimaryColumn()
-    isbn: string
+    id: string;
 
-    @Column({
-        type: 'text',
-        unique: true,
-        default: 'autor',
-        nullable: true,
-    })
+    @Column("text",{ unique: true, nullable: false })
     title: string;
 
-    @Column({
-        type: 'numeric',
-        nullable: false,
-        default: 0,
-    })
+    @Column("text",{ unique: true, nullable: true })
+    isbn: string;
+
+    @Column("numeric",{ nullable: true })
+    pageCount: number;
+
+    @Column("text",{ nullable: true })
+    publishedDate: string; 
+
+    @Column("text",{ nullable: true })
+    thumbnailUrl: string;
+
+    @Column("text",{ nullable: true })
+    shortDescription: string;
+
+    @Column("text",{ nullable: true })
+    longDescription: string;
+
+    @Column("text",{ nullable: true })
+    status: string;
+
+    @Column("numeric",{ nullable: true })
     precio: number;
 
     @ManyToOne(
         () => Autore,
         (autor) => autor.libros,
-        {cascade:true}
+        {cascade: true}
     )
-    autor_id?: Autore
-
+    autor?: Autore
 }

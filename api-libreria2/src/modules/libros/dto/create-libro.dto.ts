@@ -1,22 +1,53 @@
-import { IsNumber, IsString, MinLength } from "class-validator";
-import { Autore } from "src/modules/autores/entities/autore.entity";
-
+import { Type } from "class-transformer";
+import { IsString, MinLength, IsOptional, IsDate, IsNumber, ValidateNested } from "class-validator";
+import { CreateAutoreDto } from "src/modules/autores/dto/create-autore.dto";
 
 export class CreateLibroDto {
-
     @IsString()
     @MinLength(1)
-    isbn: string;
+    id: string;
+
+    @IsString()
+    @MinLength(4)
+    title: string;
 
     @IsString()
     @MinLength(5)
-    title: string;
+    @IsOptional()
+    isbn?: string;
 
     @IsNumber()
-    precio: number;
+    @IsOptional()
+    pageCount?: number;
 
     @IsString()
-    @MinLength(1)
-    autor_id?: Autore;
+    @IsOptional()
+    publishedDate?: string;
+    
+    @IsString()
+    @IsOptional()
+    thumbnailUrl?: string;
 
+    @IsString()
+    @MinLength(10)
+    @IsOptional()
+    shortDescription?: string;
+
+    @IsString()
+    @MinLength(15)
+    @IsOptional()
+    longDescription?: string;
+
+    @IsString()
+    @MinLength(5)
+    @IsOptional()
+    status?: string;
+
+    @IsNumber()
+    @IsOptional()
+    precio?: number;
+    
+    @IsString()
+    @IsOptional()
+    autor?: string; 
 }

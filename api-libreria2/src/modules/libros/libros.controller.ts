@@ -9,7 +9,7 @@ export class LibrosController {
 
   @Post()
   create(@Body() createLibroDto: CreateLibroDto) {
-    console.log('usuario creado perfectamente')
+    console.log('libro creado perfectamente')
     return this.librosService.create(createLibroDto);
   }
 

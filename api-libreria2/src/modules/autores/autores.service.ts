@@ -4,6 +4,7 @@ import { UpdateAutoreDto } from './dto/update-autore.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Autore } from './entities/autore.entity';
 import { Repository } from 'typeorm';
+import { FindOneOptions } from 'typeorm';
 
 @Injectable()
 export class AutoresService {
@@ -41,11 +42,16 @@ export class AutoresService {
   findAll() {
     return `This action returns all autores`;
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} autore`;
-  }
-
+/////////////////////////////////////////////////////////
+findOne(nif:string) {
+  const autor = this.autorRepository.findOne({
+    where:{
+      nif
+    }
+  })
+  return autor;
+}
+/////////////////////////////////////////////////////////
   @Patch()
   update(id: number, updateAutoreDto: UpdateAutoreDto) {
     return `This action updates a #${id} autore`;
