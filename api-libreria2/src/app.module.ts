@@ -7,6 +7,9 @@ import { SeedModule } from './modules/seed/seed.module';
 import { AutoresModule } from './modules/autores/autores.module';
 import { ClientesModule } from './modules/clientes/clientes.module';
 import { LibrosModule } from './modules/libros/libros.module';
+import { \modules\authModule } from './modules/auth/modules/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -16,7 +19,7 @@ import { LibrosModule } from './modules/libros/libros.module';
     SeedModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: '192.168.8.243',
+      host: '192.168.8.245',
       port: 5439,
       database: 'Picasso',
       username: 'postgres',
@@ -33,6 +36,7 @@ import { LibrosModule } from './modules/libros/libros.module';
       // synchronize: true
     }),
     LibrosModule,
+    \modules\authModule, AuthModule, UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
